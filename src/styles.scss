@@ -3,6 +3,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background: aliceblue;
 }
 
 button{
@@ -10,8 +11,8 @@ button{
     height: 3.5rem;
     border-radius: 8px;
     border: 0;
-    color: #000;
-    background: aquamarine;
+    color: #fff;
+    background: linear-gradient(18deg, #8f2fff, #5d4dff);
     font-size: 20px;
     font-weight: 600;
     box-shadow: 2px 20px 12px -19px lightslategrey;

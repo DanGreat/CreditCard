@@ -3,8 +3,6 @@ import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { PaymentServiceService } from 'src/app/services/payment-service.service';
 import { CreditCard } from 'src/app/model/creditCardModel';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-add-payment',
@@ -24,8 +22,7 @@ export class AddPaymentComponent implements OnInit {
 
 
   constructor(private paymentService: PaymentServiceService,
-              private formBuilder: FormBuilder,
-              private router: Router) { 
+              private formBuilder: FormBuilder) { 
 
     this.creditCardPaymentForm = this.formBuilder.group({
       creditCardNumber: new FormControl('', Validators.compose([
@@ -49,6 +46,7 @@ export class AddPaymentComponent implements OnInit {
   }
 
   makePayment() {
+
     const payload: CreditCard = {
       creditCardNumber: this.creditCardPaymentForm.value.creditCardNumber,
       cardholder: this.creditCardPaymentForm.value.cardHolder,
@@ -58,9 +56,9 @@ export class AddPaymentComponent implements OnInit {
     }
     
     this.creditCardSubscription = this.paymentService.makePayment(payload).subscribe(res => {
-      console.log(res);
+      console.log('Result: ', res);
     },
-    (err) => console.log(err))
+    (err) => console.log('Error: ', err))
   }
 
   ngOnDestroy(){
