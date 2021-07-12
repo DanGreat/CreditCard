@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'credit-card-payment';
+  title = 'Credit Card Payment';
+
+  constructor(private router: Router){}
+
+
+  proceedToPayment(){
+    this.router.navigate(['/main']);
+  }
+
+  hasRoutes(route: string){
+    return this.router.url === route;
+  }
+
 }
+
+

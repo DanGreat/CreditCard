@@ -1,0 +1,22 @@
+
+<div class="credit-card-container">
+    <form [formGroup]="creditCardPaymentForm">
+        <div>
+            <label for="creditCardNumber"></label>
+            <input type="text" name="creditCardNumber" placeholder="Credit Card Number" id="" formControlName="creditCardNumber">
+        </div>
+        <div>
+            <label for="cardHolder"></label>
+            <input type="text" name="cardHolder" placeholder="Card Holder" id="" formControlName="cardHolder">
+        </div>
+        <div>
+            <label for="securityCVVCode"></label>
+            <input type="text" name="securityCVVCode" placeholder="CVV" id="" formControlName="securityCVVCode">
+        </div>
+        <div>
+            <label for="amount"></label>
+            <input type="text" name="amount" placeholder="Amount" id="" formControlName="amount">
+        </div>
+        <button (click)="makePayment()" class="btn" [disabled]="!creditCardPaymentForm.valid">Make Payment</button>
+    </form>
+</div>
