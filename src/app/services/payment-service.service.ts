@@ -14,16 +14,19 @@ export class PaymentServiceService {
   constructor(private http: HttpClient) { }
 
   makePayment(payload: CreditCard) {
+    
     this.savedData.push(payload);
     console.log(this.savedData);
+
     return this.http.post('', payload).pipe(
       tap(data => {
         console.log('Tapped Data: ', data);
       }),
       retry(2),
       catchError (e => {
-        return of(`There was an error: ${e}`);
+        return of(`There was an error: ${e.error}`);
       })
+
     );
   }
 }

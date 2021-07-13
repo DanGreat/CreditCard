@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import { PaymentServiceService } from 'src/app/services/payment-service.service';
 import { CreditCard } from 'src/app/model/creditCardModel';
@@ -9,14 +9,14 @@ import { Subscription } from 'rxjs';
   templateUrl: './add-payment.component.html',
   styleUrls: ['./add-payment.component.scss']
 })
-export class AddPaymentComponent implements OnInit {
+export class AddPaymentComponent implements OnInit, OnDestroy {
 
   creditCardPaymentForm: FormGroup;
 
-  creditCardNumber: string = '';
-  cardHolder: string = '';
-  securityCVVCode: string = '';
-  amount: number = 0;
+  creditCardNumber: FormControl = new FormControl;
+  cardHolder: FormControl = new FormControl;
+  securityCVVCode: FormControl = new FormControl;
+  amount: FormControl = new FormControl;
 
   private creditCardSubscription: Subscription = new Subscription;
 
@@ -33,6 +33,7 @@ export class AddPaymentComponent implements OnInit {
       ])),
       securityCVVCode: new FormControl('', Validators.compose([
         Validators.required,
+        Validators.minLength(3),
         Validators.maxLength(3),
         Validators.pattern(/^-?(0|[1-9]\d*)?$/)
       ])),
@@ -43,6 +44,10 @@ export class AddPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  get cardValidationForm() {
+    return this.creditCardPaymentForm.controls
   }
 
   makePayment() {

@@ -4,18 +4,30 @@
         <div>
             <label for="creditCardNumber"></label>
             <input type="text" name="creditCardNumber" placeholder="Credit Card Number" id="" formControlName="creditCardNumber">
+            <span 
+                *ngIf="(cardValidationForm.creditCardNumber.touched || cardValidationForm.creditCardNumber.dirty) && cardValidationForm.creditCardNumber.errors?.required"
+                style="color: red;">Credit Card Number Required</span>
         </div>
         <div>
             <label for="cardHolder"></label>
             <input type="text" name="cardHolder" placeholder="Card Holder" id="" formControlName="cardHolder">
+            <span 
+                *ngIf="(cardValidationForm.cardHolder.touched || cardValidationForm.cardHolder.dirty) && cardValidationForm.cardHolder.errors?.required"
+                style="color: red;">Credit Holder Name Required</span>
         </div>
         <div>
             <label for="securityCVVCode"></label>
             <input type="text" name="securityCVVCode" placeholder="CVV" id="" formControlName="securityCVVCode">
+            <span 
+                *ngIf="(cardValidationForm.securityCVVCode.touched || cardValidationForm.securityCVVCode.dirty) && cardValidationForm.securityCVVCode.errors?.required" 
+                style="color: red;">CVV Required</span>
         </div>
         <div>
             <label for="amount"></label>
             <input type="text" name="amount" placeholder="Amount" id="" formControlName="amount">
+            <span 
+            *ngIf="(cardValidationForm.amount.touched || cardValidationForm.amount.dirty) && cardValidationForm.amount.errors?.required" 
+                style="color: red;">Credit Card Number Required</span>
         </div>
         <button (click)="makePayment()" class="btn" [disabled]="!creditCardPaymentForm.valid">Make Payment</button>
     </form>
