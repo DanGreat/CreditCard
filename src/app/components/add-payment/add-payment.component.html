@@ -1,12 +1,16 @@
 
 <div class="credit-card-container">
     <form [formGroup]="creditCardPaymentForm">
+
         <div>
             <label for="creditCardNumber"></label>
-            <input type="text" name="creditCardNumber" placeholder="Credit Card Number" id="" formControlName="creditCardNumber">
+            <input type="text" name="creditCardNumber" maxlength="19" placeholder="Card Number" id="" [(ngModel)]="cardNumber" [ngModelOptions]="{standalone: true}" (keydown)="formatCardNumber()">
             <span 
-                *ngIf="(cardValidationForm.creditCardNumber.touched || cardValidationForm.creditCardNumber.dirty) && cardValidationForm.creditCardNumber.errors?.required"
-                style="color: red;">Credit Card Number Required</span>
+                *ngIf="card_error"
+                style="color: red;">Enter a valid card</span><br>
+                <span 
+                *ngIf="cardValidationForm.creditCardNumber.errors?.required"
+                style="color: red;">Credit Card Required</span>
         </div>
         <div>
             <label for="cardHolder"></label>
@@ -16,19 +20,47 @@
                 style="color: red;">Credit Holder Name Required</span>
         </div>
         <div>
+            <label for="expiryDate"></label>
+            <input type="text" maxlength="5" minlength="5"  formControlName="expiryDate" name="expiryDate" placeholder="MM/YY">
+        </div>
+        <div>
             <label for="securityCVVCode"></label>
-            <input type="text" name="securityCVVCode" placeholder="CVV" id="" formControlName="securityCVVCode">
+            <input type="text" maxlength="3" name="securityCVVCode" placeholder="CVV" id="" formControlName="securityCVVCode">
             <span 
                 *ngIf="(cardValidationForm.securityCVVCode.touched || cardValidationForm.securityCVVCode.dirty) && cardValidationForm.securityCVVCode.errors?.required" 
                 style="color: red;">CVV Required</span>
         </div>
-        <div>
-            <label for="amount"></label>
-            <input type="text" name="amount" placeholder="Amount" id="" formControlName="amount">
-            <span 
-            *ngIf="(cardValidationForm.amount.touched || cardValidationForm.amount.dirty) && cardValidationForm.amount.errors?.required" 
-                style="color: red;">Credit Card Number Required</span>
-        </div>
-        <button (click)="makePayment()" class="btn" [disabled]="!creditCardPaymentForm.valid">Make Payment</button>
+        <button (click)="makePayment()" class="btn" [disabled]="!creditCardPaymentForm.valid || card_error">Make Payment</button>
     </form>
+
+    <div class="card-details">
+
+        <div>
+            <img [src]="cardType" alt="" class="card-type flo" />
+        </div>
+        <div class="row">
+            <label for="">Card Number</label>
+            <h2> {{ cardNumber }}</h2>
+        </div>
+        
+        <div class="row">
+            <label for="">Card Holder</label>
+            <h2> {{ cardValidationForm.cardHolder.value }}</h2>
+        </div>    
+    
+        <div class="cvv-exp">
+            <div>
+                <label for="">Expiry Date</label>
+                <h2> {{ cardValidationForm.expiryDate.value }}</h2>
+            </div>
+    
+            <div>
+                <label for="">CVV</label>
+                <h2> {{ cardValidationForm.securityCVVCode.value }}</h2>
+            </div>
+        </div>
+    
+    </div>
 </div>
+
+

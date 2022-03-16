@@ -3,5 +3,4 @@ export interface CreditCard {
     cardholder: string;
     expirationDate: Date;
     securityCVVCode: string;
-    amount: number;
 }
