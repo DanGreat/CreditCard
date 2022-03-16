@@ -1,6 +1,10 @@
 # CreditCardPayment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
+To run this project:
+Clone the Project
+Run `npm install`
+Run `ng serve`
 
 ## Development server
 
